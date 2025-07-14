@@ -1,10 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaSignOutAlt, FaCrown } from 'react-icons/fa';
 
 export default function Navbar() {
+    const navigate = useNavigate();
 
-    
+    const  hendelLogout =()=>{
+        localStorage.removeItem("authToken");
+       navigate("/login");
+       console.log("ff");
+       
+    }
 
   return (
     <nav className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-50">
@@ -31,7 +37,7 @@ export default function Navbar() {
             <Link to="/login" className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-orange-600">
               <FaUser /> Login
             </Link>
-            <button className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-red-600">
+            <button onClick={hendelLogout} className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-red-600">
               <FaSignOutAlt /> Logout
             </button>
           </div>

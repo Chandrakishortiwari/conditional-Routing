@@ -9,9 +9,13 @@ function Login() {
 
   const authToken = localStorage.getItem("authToken");
   const tokenParsed = JSON.parse(authToken);
+  console.log(tokenParsed);
+  
 
   useEffect(() => {
+    if(tokenParsed){
     navigate("/");
+    }
   
   }, [tokenParsed])
   
