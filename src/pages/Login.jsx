@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const authToken = localStorage.getItem("authToken");
+  const tokenParsed = JSON.parse(authToken);
+
+  useEffect(() => {
+    navigate("/");
+  
+  }, [tokenParsed])
+  
+
+    const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,8 +29,21 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault(); // page reload na ho
     console.log(formData);
+
+    if(!formData?.email || !formData.password ){
+        alert("please enter the value");
+        return null;
+    }
+
+    localStorage.setItem("authToken", JSON.stringify(formData));
+
+    navigate("/");
+
+
     
   };
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
